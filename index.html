@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How much You know Pranjal</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  h1, h2 {
+    text-align: center;
+    color: #333;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  .question {
+    margin-bottom: 20px;
+  }
+  .options label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .friends-board {
+    text-align: center;
+  }
+  .friend {
+    margin-bottom: 5px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>How much You know Pranjal</h1>
+  <div id="quiz">
+    <div id="start">
+      <input type="text" id="nameInput" placeholder="Enter Your Name">
+      <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+  </div>
+  <div id="friendsBoard" class="friends-board">
+    <h2>Friends Board</h2>
+    <div id="friendList"></div>
+  </div>
+</div>
+
+<script>
+  const questions = [
+    {
+      question: "What is My favourite Song",
+      options: ["Shayad", "Tu Hai Kahan", "Aankhon se batana", "Khaab"],
+      answer: "Shayad"
+    },
+    {
+      question: "What I like in evening",
+      options: ["Biscuit", "Tea", "Coffee", "All of the Above"],
+      answer: "Coffee"
+    },
+    {
+      question: "What is my Favourite Street food",
+      options: ["Panipuri", "Momos", "Ice Cream", "Chilli Potato"],
+      answer: "Momos"
+    },
+    {
+      question: "What I use the Most",
+      options: ["YouTube", "Instagram", "Discord", "WhatsApp"],
+      answer: "YouTube"
+    },
+    {
+      question: "What is My Favourite Sport",
+      options: ["Football", "Cricket", "Tennis", "Long Tennis"],
+      answer: "Cricket"
+    },
+    {
+      question: "What is My Future Career",
+      options: ["App Developer", "Web Developer", "Cricketer", "IAS"],
+      answer: "Web Developer"
+    },
+    {
+      question: "What do I Have",
+      options: ["Phone", "Laptop", "PC", "All of the Above"],
+      answer: "All of the Above"
+    },
+    {
+      question: "What I use to do in Free time",
+      options: ["Study", "Cricket Practice", "Web Developing", "All of the Above"],
+      answer: "All of the Above"
+    },
+    {
+      question: "What is My favourite Number",
+      options: ["3", "5", "7", "9"],
+      answer: "5"
+    },
+    {
+      question: "What is My Favourite Colour",
+      options: ["Magenta", "Red", "Black", "Cyan"],
+      answer: "Cyan"
+    }
+  ];
+
+  let currentQuestion = 0;
+  let score = 0;
+  let name = "";
+
+  function startQuiz() {
+    name = document.getElementById("nameInput").value;
+    if (name.trim() === "") {
+      alert("Please enter your name to start the quiz.");
+      return;
+    }
+    document.getElementById("start").style.display = "none";
+    renderQuestion();
+  }
+
+  function renderQuestion() {
+    const quiz = document.getElementById("quiz");
+    const questionSection = document.createElement("div");
+    const questionData = questions[currentQuestion];
+
+    questionSection.classList.add("question");
+    questionSection.innerHTML = `
+      <h2>${questionData.question}</h2>
+      <div class="options">
+        ${questionData.options.map(option => `<label><input type="radio" name="answer" value="${option}">${option}</label>`).join('')}
+      </div>
+      <button onclick="checkAnswer()">Next</button>
+    `;
+    quiz.appendChild(questionSection);
+  }
+
+  function checkAnswer() {
+    const selectedOption = document.querySelector('input[name="answer"]:checked');
+    if (!selectedOption) {
+      alert("Please select an option.");
+      return;
+    }
+    if (selectedOption.value === questions[currentQuestion].answer) {
+      score++;
+    }
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+      document.querySelector('.question').remove();
+      renderQuestion();
+    } else {
+      showResults();
+    }
+  }
+
+  function showResults() {
+    const quiz = document.getElementById("quiz");
+    quiz.innerHTML = `
+      <h2>Quiz Completed!</h2>
+      <p>Dear ${name}, you scored ${score} out of ${questions.length}.</p>
+    `;
+    addToFriendsBoard();
+  }
+
+  function addToFriendsBoard() {
+    const friendList = document.getElementById("friendList");
+    const friendItem = document.createElement("div");
+    friendItem.classList.add("friend");
+    friendItem.textContent = `${name}: ${score}/${questions.length}`;
+    friendList.appendChild(friendItem);
+  }
+</script>
+</body>
+  </html>
+  
