@@ -1,5 +1,3 @@
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -203,9 +201,9 @@
     const friendList = document.getElementById("friendList");
     friendsListVisible = !friendsListVisible;
     if (friendsListVisible) {
-      friendList.classList.add("active");
+      friendList.classList.toggle("active");
     } else {
-      friendList.classList.remove("active");
+      friendList.classList.toggle("active");
     }
   }
 </script>
