@@ -1,3 +1,5 @@
+</body>
+</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,9 +48,19 @@
   }
   .friends-board {
     text-align: center;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
   }
   .friend {
     margin-bottom: 5px;
+    display: none;
+  }
+  .friend.active {
+    display: block;
   }
 </style>
 </head>
@@ -61,9 +73,9 @@
       <button onclick="startQuiz()">Start Quiz</button>
     </div>
   </div>
-  <div id="friendsBoard" class="friends-board">
+  <div id="friendsBoard" class="friends-board" onclick="toggleFriendList()">
     <h2>Friends Board</h2>
-    <div id="friendList"></div>
+    <div id="friendList" class="friend"></div>
   </div>
 </div>
 
@@ -124,6 +136,7 @@
   let currentQuestion = 0;
   let score = 0;
   let name = "";
+  let friendsListVisible = false;
 
   function startQuiz() {
     name = document.getElementById("nameInput").value;
@@ -184,6 +197,16 @@
     friendItem.classList.add("friend");
     friendItem.textContent = `${name}: ${score}/${questions.length}`;
     friendList.appendChild(friendItem);
+  }
+
+  function toggleFriendList() {
+    const friendList = document.getElementById("friendList");
+    friendsListVisible = !friendsListVisible;
+    if (friendsListVisible) {
+      friendList.classList.add("active");
+    } else {
+      friendList.classList.remove("active");
+    }
   }
 </script>
 </body>
