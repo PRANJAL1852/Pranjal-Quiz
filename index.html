@@ -134,7 +134,6 @@
   let currentQuestion = 0;
   let score = 0;
   let name = "";
-  let friendsListVisible = false;
 
   function startQuiz() {
     name = document.getElementById("nameInput").value;
@@ -192,14 +191,13 @@
   function addToFriendsBoard() {
     const friendList = document.getElementById("friendList");
     const friendItem = document.createElement("div");
-    friendItem.classList.add("friend");
     friendItem.textContent = `${name}: ${score}/${questions.length}`;
     friendList.appendChild(friendItem);
   }
 
   function toggleFriendList() {
     const friendList = document.getElementById("friendList");
-    friendList.classList.toggle("active");
+    friendList.style.display = friendList.style.display === "none" ? "block" : "none";
   }
 </script>
 </body>
