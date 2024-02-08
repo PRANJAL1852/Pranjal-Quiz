@@ -52,7 +52,6 @@
     padding: 10px;
     border-radius: 5px;
     margin-top: 20px;
-    display: none; /* Initially hide the Friends Board */
   }
   .friend {
     margin-bottom: 5px;
@@ -197,6 +196,15 @@
     localStorage.setItem("friendsData", JSON.stringify(friendsData));
   }
 
+  function toggleFriendList() {
+    const friendList = document.getElementById("friendList");
+    friendList.style.display = friendList.style.display === "none" ? "block" : "none"; // Toggle visibility of Friends Board
+  }
+
+  window.onload = function() {
+    loadFriendsBoard(); // Load Friends Board data when the page loads
+  };
+
   function loadFriendsBoard() {
     const friendList = document.getElementById("friendList");
     friendList.innerHTML = ""; // Clear existing friend list
@@ -208,13 +216,7 @@
         friendItem.textContent = `${friend.name}: ${friend.score}`;
         friendList.appendChild(friendItem);
     });
-
-    friendList.style.display = friendList.style.display === "none" ? "block" : "none"; // Toggle visibility of Friends Board
   }
-
-  window.onload = function() {
-    loadFriendsBoard(); // Load Friends Board data when the page loads
-  };
 </script>
 </body>
 </html>
