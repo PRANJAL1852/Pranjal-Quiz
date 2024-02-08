@@ -207,10 +207,12 @@
     // Load Friends Board data from local storage
     const friendsData = JSON.parse(localStorage.getItem("friendsData")) || [];
     friendsData.forEach(friend => {
-      const friendItem = document.createElement("div");
-      friendItem.textContent = `${friend.name}: ${friend.score}`;
-      friendList.appendChild(friendItem);
+        const friendItem = document.createElement("div");
+        friendItem.textContent = `${friend.name}: ${friend.score}`;
+        friendList.appendChild(friendItem);
     });
+
+    friendList.style.display = "block"; // Ensure the friend list is visible
   }
 
   function toggleFriendList() {
