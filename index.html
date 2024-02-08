@@ -52,13 +52,10 @@
     padding: 10px;
     border-radius: 5px;
     margin-top: 20px;
+    display: none; /* Initially hide the Friends Board */
   }
   .friend {
     margin-bottom: 5px;
-    display: none;
-  }
-  .friend.active {
-    display: block;
   }
 </style>
 </head>
@@ -71,7 +68,7 @@
       <button onclick="startQuiz()">Start Quiz</button>
     </div>
   </div>
-  <div id="friendsBoard" class="friends-board" onclick="loadFriendsBoard()"> <!-- Call loadFriendsBoard() directly -->
+  <div id="friendsBoard" class="friends-board" onclick="toggleFriendList()"> <!-- Toggle visibility of Friends Board -->
     <h2>Friends Board</h2>
     <div id="friendList" class="friend"></div>
   </div>
@@ -212,12 +209,7 @@
         friendList.appendChild(friendItem);
     });
 
-    friendList.style.display = "block"; // Ensure the friend list is visible
-  }
-
-  function toggleFriendList() {
-    const friendList = document.getElementById("friendList");
-    friendList.style.display = friendList.style.display === "none" ? "block" : "none";
+    friendList.style.display = friendList.style.display === "none" ? "block" : "none"; // Toggle visibility of Friends Board
   }
 
   window.onload = function() {
