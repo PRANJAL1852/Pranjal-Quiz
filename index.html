@@ -55,6 +55,10 @@
   }
   .friend {
     margin-bottom: 5px;
+    display: none; /* Initially hide the Friends Board */
+  }
+  .friend.active {
+    display: block;
   }
 </style>
 </head>
@@ -67,7 +71,7 @@
       <button onclick="startQuiz()">Start Quiz</button>
     </div>
   </div>
-  <div id="friendsBoard" class="friends-board" onclick="toggleFriendList()"> <!-- Toggle visibility of Friends Board -->
+  <div id="friendsBoard" class="friends-board" onclick="loadFriendsBoard()"> <!-- Toggle visibility of Friends Board -->
     <h2>Friends Board</h2>
     <div id="friendList" class="friend"></div>
   </div>
@@ -190,20 +194,8 @@
     friendItem.textContent = `${name}: ${score}/${questions.length}`;
     friendList.appendChild(friendItem);
 
-    // Save the Friends Board data to local storage
-    const friendsData = JSON.parse(localStorage.getItem("friendsData")) || [];
-    friendsData.push({ name, score: `${score}/${questions.length}` });
-    localStorage.setItem("friendsData", JSON.stringify(friendsData));
+    friendList.classList.add("active"); // Ensure Friends Board is visible
   }
-
-  function toggleFriendList() {
-    const friendList = document.getElementById("friendList");
-    friendList.style.display = friendList.style.display === "none" ? "block" : "none"; // Toggle visibility of Friends Board
-  }
-
-  window.onload = function() {
-    loadFriendsBoard(); // Load Friends Board data when the page loads
-  };
 
   function loadFriendsBoard() {
     const friendList = document.getElementById("friendList");
@@ -216,7 +208,13 @@
         friendItem.textContent = `${friend.name}: ${friend.score}`;
         friendList.appendChild(friendItem);
     });
+
+    friendList.classList.toggle("active"); // Toggle visibility of Friends Board
   }
+
+  window.onload = function() {
+    loadFriendsBoard(); // Load Friends Board data when the page loads
+  };
 </script>
 </body>
 </html>
